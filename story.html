@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Every Life Matters — A Photo Journal from Jabalpur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#241c16;--muted:#6f6055;--cream:#f7f1e8;--cream-deep:#efe5d6;
+    --card:#fffdf9;--accent:#c9572f;--gold:#d99a4e;--green:#4e6b46;--line:#e5d9c8;
+    --shadow-sm:0 4px 14px rgba(60,40,25,.08);--shadow:0 16px 44px rgba(60,40,25,.14);--radius:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;width:100%;height:100%;object-fit:cover}
+  h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em;line-height:1.12}
+
+  /* print toolbar (screen only) */
+  .printbar{position:sticky;top:0;z-index:50;background:#241c16;color:#fff;display:flex;align-items:center;justify-content:center;gap:14px;padding:10px 16px;font-size:.92rem;flex-wrap:wrap}
+  .printbar b{font-weight:600}
+  .printbar button{background:var(--accent);color:#fff;border:none;border-radius:50px;padding:9px 20px;font-weight:600;font-size:.92rem;cursor:pointer;font-family:inherit}
+  .printbar button:hover{background:#a8431f}
+
+  /* HERO */
+  .hero{position:relative;min-height:96vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden}
+  .hero .bg{position:absolute;inset:0;z-index:0}
+  .hero .bg img{filter:brightness(.55) saturate(1.05);transform:scale(1.05)}
+  .hero::after{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at center,transparent 20%,rgba(20,12,8,.55) 100%),linear-gradient(to top,rgba(20,12,8,.85),rgba(20,12,8,.15) 55%,rgba(20,12,8,.4))}
+  .hero-inner{position:relative;z-index:2;max-width:840px;padding:40px 24px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;letter-spacing:.28em;text-transform:uppercase;font-size:.7rem;font-weight:600;color:#f4e7da;margin-bottom:26px}
+  .eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:rgba(255,255,255,.6)}
+  .hero h1{font-size:clamp(2.5rem,7vw,5rem);text-shadow:0 2px 30px rgba(0,0,0,.45)}
+  .hero h1 em{font-style:italic;color:#f0b98a}
+  .hero p{margin:22px auto 0;font-size:clamp(1.05rem,2.2vw,1.32rem);max-width:600px;color:#f1e8de;font-weight:400}
+
+  section{padding:88px 24px}
+  .wrap{max-width:1080px;margin:0 auto}
+  .kicker{display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+  .section-title{font-size:clamp(1.9rem,4.5vw,3rem)}
+  .section-title em{font-style:italic;color:var(--accent)}
+  .lead{font-size:1.18rem;color:var(--muted);margin-top:18px}
+  .center{text-align:center}
+  .center .lead{margin-left:auto;margin-right:auto;max-width:640px}
+
+  /* intro */
+  .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+  .intro-photo{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3}
+  .intro-body .lead{margin-top:18px}
+
+  /* big quote band */
+  .quote{background:linear-gradient(135deg,#2c211a,#43342a);color:#fff;text-align:center}
+  .quote blockquote{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(1.5rem,3.6vw,2.4rem);line-height:1.3;max-width:820px;margin:0 auto}
+  .quote blockquote span{color:#f0b98a}
+  .quote .by{margin-top:22px;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:#c9bbac}
+
+  /* journal chapters */
+  .chapter{padding:0}
+  .chap-row{display:grid;grid-template-columns:1fr 1fr;align-items:center}
+  .chap-row .media{position:relative;min-height:560px;overflow:hidden}
+  .chap-row .body{padding:76px 60px}
+  .chap-row.flip .media{order:2}
+  .chap-row:nth-child(even){background:var(--cream-deep)}
+  .num-tag{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--accent);display:block;margin-bottom:10px}
+  .chap-row h3{font-size:clamp(1.6rem,3.2vw,2.3rem);margin-bottom:14px}
+  .chap-row p{color:var(--muted);font-size:1.08rem}
+
+  /* full-bleed photo break */
+  .bleed{position:relative;height:78vh;min-height:460px;overflow:hidden}
+  .bleed img{filter:brightness(.82)}
+  .bleed figcaption{position:absolute;left:0;right:0;bottom:0;padding:60px 28px 30px;color:#fff;text-align:center;font-family:'Fraunces',serif;font-style:italic;font-size:clamp(1.2rem,3vw,1.9rem);background:linear-gradient(to top,rgba(0,0,0,.7),transparent)}
+
+  /* journal gallery */
+  .gallery-sec{background:var(--cream-deep)}
+  .masonry{columns:4;column-gap:16px;margin-top:46px}
+  .masonry figure{break-inside:avoid;margin:0 0 16px;border-radius:16px;overflow:hidden;position:relative;box-shadow:var(--shadow-sm);background:#000}
+  .masonry figcaption{position:absolute;inset:auto 0 0 0;padding:30px 16px 14px;font-size:.86rem;font-weight:500;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.78),transparent);opacity:0;transition:.35s ease}
+  .masonry figure:hover figcaption{opacity:1}
+
+  /* closing */
+  .closing{text-align:center;background:var(--cream)}
+  .closing .section-title{max-width:760px;margin:0 auto}
+  .closing .lead{max-width:560px;margin-left:auto;margin-right:auto;text-wrap:balance}
+
+  footer{text-align:center;padding:54px 24px 60px;color:var(--muted);background:var(--cream-deep)}
+  footer .fmark{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--ink)}
+  footer .heart{color:var(--accent)}
+  footer .small{font-size:.88rem;margin-top:8px}
+
+  @media(max-width:980px){.masonry{columns:3}}
+  @media(max-width:760px){
+    section{padding:60px 20px}
+    .intro-grid{grid-template-columns:1fr;gap:30px}
+    .chap-row{grid-template-columns:1fr}
+    .chap-row .media{min-height:320px;order:1 !important}
+    .chap-row .body{padding:40px 28px}
+    .masonry{columns:2;column-gap:12px}
+    .bleed{height:52vh}
+  }
+
+  /* ---------- PRINT (PDF) ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    .printbar{display:none !important}
+    html,body{background:#fff}
+    @page{margin:12mm 10mm;size:A4 portrait}
+
+    /* kill viewport-height layouts that leave huge blank space on paper */
+    .hero{height:auto;min-height:0;aspect-ratio:1/1.05;page-break-after:always;margin:-12mm -10mm 0}
+    section{padding:30px 4px}
+
+    /* intro: keep two columns but constrain image height */
+    .intro-grid{gap:30px}
+    .intro-photo{aspect-ratio:4/3;max-height:none}
+
+    /* quote band compact, full width to paper edge */
+    .quote{padding:36px 28px;margin:0 -10mm}
+
+    /* chapters: two columns, fixed media height, NO forced page-per-row */
+    .chap-row{min-height:0;page-break-inside:avoid;align-items:stretch}
+    .chap-row .media{min-height:0;height:auto;aspect-ratio:4/3}
+    .chap-row .media img{height:100%}
+    .chap-row .body{padding:24px 26px;display:flex;flex-direction:column;justify-content:center}
+    .chap-row.flip .media{order:0}            /* flip ignored on paper for predictable stacking */
+
+    /* full-bleed feature photo */
+    .bleed{height:auto;min-height:0;aspect-ratio:16/9;page-break-inside:avoid;margin:0 -10mm}
+    .bleed img{filter:brightness(.82)}
+
+    /* gallery on its own page, 3 tight columns */
+    .gallery-sec{page-break-before:always}
+    .masonry{columns:3;column-gap:10px}
+    .masonry figure{margin-bottom:10px;box-shadow:none}
+    .masonry figcaption{display:none}        /* captions only make sense on hover */
+
+    .closing{page-break-inside:avoid}
+    a{color:inherit;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="printbar">
+  <span><b>To save as PDF:</b> click the button (or press Ctrl/Cmd&nbsp;+&nbsp;P) → choose “Save as PDF”. The photos embed automatically.</span>
+  <button onclick="window.print()">Save as PDF</button>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="bg"><img src="WhatsApp Image 2026-06-15 at 22.09.05 (4).jpeg" alt="A rescued puppy held gently with a flower"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">A Photo Journal &middot; Jabalpur, India</span>
+    <h1>Every life on the street<br>deserves a <em>second chance</em>.</h1>
+    <p>The story of Vihan and his family — and the dogs, puppies and cattle they love back to life.</p>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section>
+  <div class="wrap intro-grid">
+    <div class="intro-photo"><img src="family photo.jpeg" alt="Vihan and his family at home with a rescued dog"></div>
+    <div class="intro-body">
+      <span class="kicker">Who we are</span>
+      <h2 class="section-title">A home where the helpless are <em>never turned away</em></h2>
+      <p class="lead">It started the way most rescues do — one trembling puppy that nobody else would stop for. Today, <strong>Vihan and his family</strong> run a small, self-funded rescue out of their home. There's no big building and no salary. Just a family that refuses to walk past suffering — and the rescued ones who've become part of the family.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BAND -->
+<section class="quote">
+  <div class="wrap">
+    <blockquote>“We can't save every animal on the street. But the one in front of us, <span>today</span> — that one, we can.”</blockquote>
+    <div class="by">The everyday belief behind the work</div>
+  </div>
+</section>
+
+<!-- CHAPTERS -->
+<div class="chapter">
+  <div class="chap-row">
+    <div class="media"><img src="WhatsApp Image 2026-06-15 at 22.09.04.jpeg" alt="A small black rescued puppy wrapped in a warm sweater"></div>
+    <div class="body">
+      <span class="num-tag">01 — The rescue</span>
+      <h3>It begins with one small life</h3>
+      <p>Most arrive frightened, hungry and alone — pulled from gutters, roadsides and market corners. Some are only days old, with eyes barely open. The first hours are about warmth, a borrowed sweater, food, and the simple discovery that a human hand can be gentle.</p>
+    </div>
+  </div>
+
+  <div class="chap-row flip">
+    <div class="media"><img src="WhatsApp Image 2026-06-15 at 22.09.06.jpeg" alt="A rescued dog on an IV drip being cared for at night"></div>
+    <div class="body">
+      <span class="num-tag">02 — The healing</span>
+      <h3>Late nights and never giving up</h3>
+      <p>Injured dogs get IV drips, bandages, recovery cones and round-the-clock attention — often through the night. Every drip, every dressing, every small meal is a step back toward a life worth wagging for.</p>
+    </div>
+  </div>
+
+  <div class="chap-row">
+    <div class="media"><img src="WhatsApp Image 2026-06-15 at 22.09.05 (16).jpeg" alt="A weak cow supported upright in a recovery sling"></div>
+    <div class="body">
+      <span class="num-tag">03 — Beyond dogs</span>
+      <h3>Care for the cattle, too</h3>
+      <p>Cows and bullocks that collapse on the road — too weak or injured to rise — are brought in, slung upright, fed and treated for as long as it takes. It's heavy, demanding work few are willing to take on. Here, no animal is too big or too broken to help.</p>
+    </div>
+  </div>
+
+  <div class="chap-row flip">
+    <div class="media"><img src="WhatsApp Image 2026-06-15 at 22.09.06 (5).jpeg" alt="A mother dog nursing her litter in a brick shelter"></div>
+    <div class="body">
+      <span class="num-tag">04 — The family that forms</span>
+      <h3>Where new beginnings happen</h3>
+      <p>A mother and her litter, safe under a roof. Recovering dogs napping in the sun. Pups who arrived terrified now playing, trusting, becoming dogs again. This is what all the hard nights are for.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FULL-BLEED BREAK -->
+<figure class="bleed">
+  <img src="WhatsApp Image 2026-06-15 at 22.09.05 (7).jpeg" alt="A tricolor rescued dog resting peacefully">
+  <figcaption>Trust, earned one quiet day at a time.</figcaption>
+</figure>
+
+<!-- GALLERY -->
+<section class="gallery-sec center">
+  <div class="wrap">
+    <span class="kicker">The gallery</span>
+    <h2 class="section-title">Faces worth <em>remembering</em></h2>
+    <p class="lead">A glimpse of daily life inside the rescue — the arrivals, the recoveries, the playtime, and the families that form along the way.</p>
+
+    <div class="masonry">
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (4).jpeg" alt="Puppy with a flower"><figcaption>Safe, and finally smiling.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.04.jpeg" alt="Black puppy in a warm sweater"><figcaption>Warm in a borrowed sweater.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.06 (2).jpeg" alt="Injured dog with bandaged leg resting"><figcaption>Bandaged, warm and safe indoors.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (2).jpeg" alt="Puppy resting on a floral blanket"><figcaption>A soft bed, maybe for the first time.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (1).jpeg" alt="Family member cradling a puppy"><figcaption>Held like family.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (7).jpeg" alt="Tricolor dog resting on a bed"><figcaption>Trust, earned one day at a time.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.06 (5).jpeg" alt="Mother dog nursing her litter"><figcaption>A mother and her litter, sheltered.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05.jpeg" alt="Happy dog with a yellow collar"><figcaption>Healthy, collared &amp; home.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.04 (5).jpeg" alt="Rescued white dog held by a volunteer"><figcaption>From the street to safe arms.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (14).jpeg" alt="Recovering dog in a sweater asleep on a chair"><figcaption>Resting in a borrowed sweater.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.04 (6).jpeg" alt="Dogs playing with a stick"><figcaption>Just being dogs again.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (3).jpeg" alt="Dog in a recovery cone"><figcaption>Recovering after surgery.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.06 (9).jpeg" alt="Tiny puppy looking up"><figcaption>Every one of them matters.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (5).jpeg" alt="Dog resting in a playpen"><figcaption>A quiet, safe corner to heal.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (18).jpeg" alt="A rescued cow grazing"><figcaption>Grazing again, regaining strength.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.04 (1).jpeg" alt="Sleepy black puppy on a mat"><figcaption>Warm, fed and resting.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (12).jpeg" alt="Two dogs resting together"><figcaption>Recovering, together.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (11).jpeg" alt="A man holding a rescued puppy at the vet"><figcaption>Safe in steady hands.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <span class="kicker">The work continues</span>
+  <h2 class="section-title">Quietly, faithfully — <em>one life at a time</em>.</h2>
+  <p class="lead">No grand building. No headlines. Just a family, an open door, and the belief that every life is worth saving.</p>
+</section>
+
+<footer>
+  <p class="fmark">Run with love by Vihan &amp; family — Jabalpur, India</p>
+  <p class="small">Made with <span class="heart">&#10084;</span> for the animals who can't ask for help themselves.</p>
+</footer>
+
+</body>
+</html>
