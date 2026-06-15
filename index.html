@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Every Life Matters — Animal Rescue in Jabalpur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#241c16;
+    --muted:#6f6055;
+    --cream:#f7f1e8;
+    --cream-deep:#efe5d6;
+    --card:#fffdf9;
+    --accent:#c9572f;       /* terracotta */
+    --accent-dark:#a8431f;
+    --gold:#d99a4e;
+    --green:#4e6b46;
+    --line:#e5d9c8;
+    --shadow-sm:0 4px 14px rgba(60,40,25,.08);
+    --shadow:0 16px 44px rgba(60,40,25,.14);
+    --radius:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;width:100%;height:100%;object-fit:cover}
+  h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em;line-height:1.12}
+  .serif-italic{font-family:'Fraunces',serif;font-style:italic;font-weight:500}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;color:#fff;overflow:hidden;
+  }
+  .hero .bg{position:absolute;inset:0;z-index:0}
+  .hero .bg img{filter:brightness(.55) saturate(1.05);transform:scale(1.05)}
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:radial-gradient(ellipse at center,transparent 20%,rgba(20,12,8,.55) 100%),
+               linear-gradient(to top,rgba(20,12,8,.85),rgba(20,12,8,.15) 55%,rgba(20,12,8,.4));
+  }
+  .hero-inner{position:relative;z-index:2;max-width:840px;padding:40px 24px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    letter-spacing:.28em;text-transform:uppercase;font-size:.7rem;font-weight:600;
+    color:#f4e7da;margin-bottom:26px;
+  }
+  .eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:rgba(255,255,255,.6)}
+  .hero h1{font-size:clamp(2.5rem,7vw,5rem);text-shadow:0 2px 30px rgba(0,0,0,.45)}
+  .hero h1 em{font-style:italic;color:#f0b98a}
+  .hero p{
+    margin:22px auto 0;font-size:clamp(1.05rem,2.2vw,1.32rem);
+    max-width:600px;color:#f1e8de;font-weight:400;
+  }
+  .cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .btn{
+    display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
+    font-weight:600;font-size:1rem;padding:15px 32px;border-radius:50px;
+    transition:transform .18s ease,background .2s ease,box-shadow .2s ease;
+    box-shadow:0 8px 24px rgba(201,87,47,.45);
+  }
+  .btn:hover{background:var(--accent-dark);transform:translateY(-3px);box-shadow:0 12px 30px rgba(201,87,47,.55)}
+  .btn.ghost{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.55);box-shadow:none;backdrop-filter:blur(4px)}
+  .btn.ghost:hover{background:rgba(255,255,255,.18)}
+  .scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.7);font-size:1.4rem;animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+  /* ---------- LAYOUT ---------- */
+  section{padding:96px 24px}
+  .wrap{max-width:1080px;margin:0 auto}
+  .narrow{max-width:760px}
+  .kicker{
+    display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:16px;
+  }
+  .section-title{font-size:clamp(1.9rem,4.5vw,3rem)}
+  .section-title em{font-style:italic;color:var(--accent)}
+  .lead{font-size:1.18rem;color:var(--muted);margin-top:18px}
+  .center{text-align:center}
+  .center .lead{margin-left:auto;margin-right:auto;max-width:640px}
+
+  /* intro / who-we-are */
+  .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+  .intro-photo{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3}
+  .intro-photo img{transition:transform 8s ease}
+  .intro-grid:hover .intro-photo img{transform:scale(1.05)}
+  .intro-body .lead{margin-top:18px}
+
+  /* ---------- IMPACT BAND (replaces old stats) ---------- */
+  .impact{
+    position:relative;
+    background:linear-gradient(135deg,#2c211a 0%,#43342a 100%);
+    color:#fff;padding:0;overflow:hidden;
+  }
+  .impact-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+  .impact-photo{position:relative;min-height:440px}
+  .impact-photo img{filter:saturate(1.05)}
+  .impact-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(44,33,26,.95))}
+  .impact-text{padding:72px 56px;display:flex;flex-direction:column;justify-content:center}
+  .impact-text .kicker{color:var(--gold)}
+  .impact-text h2{font-size:clamp(1.8rem,3.5vw,2.6rem);color:#fff}
+  .impact-text h2 em{font-style:italic;color:#f0b98a}
+  .impact-text p{color:#e6dace;margin-top:18px;font-size:1.08rem}
+  .impact-stats{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .impact-stat{flex:1;min-width:120px;border-left:2px solid rgba(217,154,78,.6);padding-left:16px}
+  .impact-stat .num{font-family:'Fraunces',serif;font-size:2.1rem;font-weight:600;color:#fff;line-height:1}
+  .impact-stat .lbl{font-size:.84rem;color:#c9bbac;margin-top:6px}
+
+  /* ---------- STORY ROWS ---------- */
+  .story{padding:0}
+  .story-row{display:grid;grid-template-columns:1fr 1fr;align-items:center}
+  .story-row .media{position:relative;min-height:520px;overflow:hidden}
+  .story-row .media img{transition:transform 8s ease}
+  .story-row:hover .media img{transform:scale(1.06)}
+  .story-row .body{padding:80px 64px}
+  .story-row.flip .media{order:2}
+  .story-row .num-tag{
+    font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--accent);
+    display:block;margin-bottom:10px;
+  }
+  .story-row h3{font-size:clamp(1.6rem,3.2vw,2.3rem);margin-bottom:14px}
+  .story-row p{color:var(--muted);font-size:1.08rem}
+  .story-row:nth-child(even){background:var(--cream-deep)}
+
+  /* ---------- GALLERY (masonry) ---------- */
+  .gallery-sec{background:var(--cream-deep)}
+  .masonry{columns:4;column-gap:16px;margin-top:46px}
+  .masonry figure{
+    break-inside:avoid;margin:0 0 16px;border-radius:16px;overflow:hidden;
+    position:relative;cursor:pointer;box-shadow:var(--shadow-sm);
+    background:#000;
+  }
+  .masonry img{transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .4s ease}
+  .masonry figure:hover img{transform:scale(1.07)}
+  .masonry figcaption{
+    position:absolute;inset:auto 0 0 0;padding:30px 16px 14px;
+    font-size:.86rem;font-weight:500;color:#fff;
+    background:linear-gradient(to top,rgba(0,0,0,.78),transparent);
+    opacity:0;transform:translateY(8px);transition:.35s ease;
+  }
+  .masonry figure:hover figcaption{opacity:1;transform:translateY(0)}
+  .masonry figure::before{
+    content:"⤢";position:absolute;top:12px;right:12px;z-index:2;
+    width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    background:rgba(255,255,255,.18);color:#fff;font-size:.95rem;
+    backdrop-filter:blur(6px);opacity:0;transition:.3s ease;
+  }
+  .masonry figure:hover::before{opacity:1}
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position:fixed;inset:0;z-index:100;display:none;
+    align-items:center;justify-content:center;
+    background:rgba(18,12,8,.92);padding:30px;cursor:zoom-out;
+  }
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:92vw;max-height:88vh;width:auto;height:auto;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .lightbox .close{position:absolute;top:22px;right:28px;color:#fff;font-size:2.4rem;line-height:1;cursor:pointer;opacity:.8}
+  .lightbox .close:hover{opacity:1}
+
+  /* ---------- DONATE ---------- */
+  .donate-sec{background:var(--cream)}
+  .donate{
+    position:relative;background:linear-gradient(135deg,#2c211a,#4a3829);
+    color:#fff;border-radius:28px;padding:64px 40px;text-align:center;
+    box-shadow:var(--shadow);overflow:hidden;
+  }
+  .donate::before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;
+    background:radial-gradient(circle,rgba(217,154,78,.22),transparent 70%);top:-120px;right:-100px}
+  .donate .kicker{color:var(--gold);position:relative}
+  .donate h2{font-size:clamp(1.9rem,4vw,2.7rem);position:relative}
+  .donate h2 em{font-style:italic;color:#f0b98a}
+  .donate>p{color:#e8ddd0;max-width:560px;margin:16px auto 0;position:relative}
+  .give-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:40px 0 36px;position:relative}
+  .give{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+    border-radius:16px;padding:26px 18px;transition:.25s ease;
+  }
+  .give:hover{background:rgba(255,255,255,.11);transform:translateY(-4px)}
+  .give .amt{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:600;color:#f0b98a}
+  .give .what{font-size:.9rem;color:#ddd0c2;margin-top:8px}
+  .details-card{
+    position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+    border-radius:16px;padding:28px 26px;max-width:520px;margin:0 auto;text-align:left;
+  }
+  .detail-row{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.98rem}
+  .detail-row:last-child{border-bottom:none}
+  .detail-row .k{color:#c9bbac}
+  .placeholder{background:rgba(217,154,78,.18);border:1px dashed rgba(240,185,138,.6);border-radius:8px;padding:2px 9px;font-style:italic;color:#ffd9bd;font-size:.88rem}
+  .share-note{margin-top:30px;position:relative;font-weight:500;color:#f4e7da}
+
+  footer{text-align:center;padding:54px 24px 60px;color:var(--muted);background:var(--cream-deep)}
+  footer .fmark{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--ink)}
+  footer .heart{color:var(--accent)}
+  footer .small{font-size:.88rem;margin-top:8px}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){.masonry{columns:3}}
+  @media(max-width:760px){
+    section{padding:64px 20px}
+    .intro-grid{grid-template-columns:1fr;gap:30px}
+    .impact-grid{grid-template-columns:1fr}
+    .impact-photo{min-height:300px}
+    .impact-photo::after{background:linear-gradient(to top,rgba(44,33,26,.95),transparent 70%)}
+    .impact-text{padding:44px 28px}
+    .story-row{grid-template-columns:1fr}
+    .story-row .media{min-height:320px;order:1 !important}
+    .story-row .body{padding:40px 28px}
+    .masonry{columns:2;column-gap:12px}
+    .masonry figure{margin-bottom:12px}
+    .give-grid{grid-template-columns:1fr}
+    .donate{padding:44px 24px}
+    .detail-row{flex-direction:column;gap:4px}
+  }
+
+  /* ---------- PRINT (PDF) ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    html,body{background:#fff}
+    @page{margin:12mm 10mm;size:A4 portrait}
+    .scroll-hint{display:none !important}
+
+    .hero{height:auto;min-height:0;aspect-ratio:1/1.05;page-break-after:always;margin:-12mm -10mm 0}
+    section{padding:30px 4px}
+
+    .intro-grid{gap:30px}
+    .intro-photo{aspect-ratio:4/3}
+
+    .impact{page-break-inside:avoid;margin:0 -10mm}
+    .impact-photo{min-height:0;aspect-ratio:4/3}
+    .impact-text{padding:30px 34px}
+
+    .story-row{min-height:0;page-break-inside:avoid;align-items:stretch}
+    .story-row .media{min-height:0;height:auto;aspect-ratio:4/3}
+    .story-row .media img{height:100%}
+    .story-row .body{padding:24px 26px;display:flex;flex-direction:column;justify-content:center}
+    .story-row.flip .media{order:0}
+
+    .gallery-sec{page-break-before:always}
+    .masonry{columns:3;column-gap:10px}
+    .masonry figure{margin-bottom:10px;box-shadow:none}
+    .masonry figcaption,.masonry figure::before{display:none}
+
+    .donate-sec{page-break-before:always}
+    .donate{box-shadow:none}
+    a{color:inherit;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="bg"><img src="WhatsApp Image 2026-06-15 at 22.09.05 (4).jpeg" alt="A rescued puppy held gently with a flower"></div>
+  <div class="hero-inner">
+    <span class="eyebrow">Animal Rescue &middot; Jabalpur, India</span>
+    <h1>Every life on the street<br>deserves a <em>second chance</em>.</h1>
+    <p>Vihan and his family open their home and their hands to the dogs, puppies and injured cattle the city forgets — feeding, healing and loving them back to life.</p>
+    <div class="cta-row">
+      <a class="btn" href="#donate">Help us keep going</a>
+      <a class="btn ghost" href="#story">See their story</a>
+    </div>
+  </div>
+  <div class="scroll-hint">&#8595;</div>
+</header>
+
+<!-- INTRO -->
+<section>
+  <div class="wrap intro-grid">
+    <div class="intro-photo"><img src="family photo.jpeg" alt="Vihan and his family at home with a rescued dog"></div>
+    <div class="intro-body">
+      <span class="kicker">Who we are</span>
+      <h2 class="section-title">A home where the helpless are <em>never turned away</em></h2>
+      <p class="lead">It started the way most rescues do — one trembling puppy that nobody else would stop for. Today, <strong>Vihan and his family</strong> run a small, self-funded rescue out of their home. There's no big building and no salary. Just a family that refuses to walk past suffering — and the rescued ones who've become part of the family.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT BAND (redesigned 'every day' section) -->
+<section class="impact" style="padding:0">
+  <div class="impact-grid">
+    <div class="impact-photo"><img src="WhatsApp Image 2026-06-15 at 22.09.05 (6).jpeg" alt="Rescued dogs being fed at home at night"></div>
+    <div class="impact-text">
+      <span class="kicker">Every single day</span>
+      <h2>The bowls are always full.<br>The door is <em>always open</em>.</h2>
+      <p>From abandoned newborn pups to street dogs hit by traffic to cattle too weak to stand — the work never stops. It's constant, messy and quietly heroic, carried out 365 days a year on nothing but love and the kindness of strangers.</p>
+      <div class="impact-stats">
+        <div class="impact-stat"><div class="num">365</div><div class="lbl">days a year, rain or shine</div></div>
+        <div class="impact-stat"><div class="num">100%</div><div class="lbl">family-run &amp; donation-powered</div></div>
+        <div class="impact-stat"><div class="num">Dogs &amp;<br>cattle</div><div class="lbl">fed, treated &amp; rehabilitated</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY ROWS -->
+<div id="story" class="story">
+  <div class="story-row">
+    <div class="media"><img src="WhatsApp Image 2026-06-15 at 22.09.04.jpeg" alt="A small black rescued puppy wrapped in a warm sweater"></div>
+    <div class="body">
+      <span class="num-tag">01 — The rescue</span>
+      <h3>It begins with one small life</h3>
+      <p>Most arrive frightened, hungry and alone — pulled from gutters, roadsides and market corners. Some are only days old, with eyes barely open. The first hours are about warmth, a borrowed sweater, food, and the simple discovery that a human hand can be gentle.</p>
+    </div>
+  </div>
+
+  <div class="story-row flip">
+    <div class="media"><img src="WhatsApp Image 2026-06-15 at 22.09.06.jpeg" alt="A rescued dog on an IV drip being cared for at night"></div>
+    <div class="body">
+      <span class="num-tag">02 — The healing</span>
+      <h3>Late nights and never giving up</h3>
+      <p>Injured dogs get IV drips, bandages, recovery cones and round-the-clock attention — often through the night. Every drip, every dressing, every small meal is a step back toward a life worth wagging for.</p>
+    </div>
+  </div>
+
+  <div class="story-row">
+    <div class="media"><img src="WhatsApp Image 2026-06-15 at 22.09.05 (16).jpeg" alt="A weak cow supported upright in a recovery sling"></div>
+    <div class="body">
+      <span class="num-tag">03 — Beyond dogs</span>
+      <h3>Care for the cattle, too</h3>
+      <p>Cows and bullocks that collapse on the road — too weak or injured to rise — are brought in, slung upright, fed and treated for as long as it takes. It's heavy, demanding work few are willing to take on. Here, no animal is too big or too broken to help.</p>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-sec center">
+  <div class="wrap">
+    <span class="kicker">The gallery</span>
+    <h2 class="section-title">Faces worth <em>fighting for</em></h2>
+    <p class="lead">A glimpse of daily life inside the rescue — the rescues, the recoveries, the playtime, and the families that form along the way. Tap any photo to see it up close.</p>
+
+    <div class="masonry" id="masonry">
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (4).jpeg" alt="Puppy with a flower"><figcaption>Safe, and finally smiling.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.06 (2).jpeg" alt="Injured dog with bandaged leg resting"><figcaption>Bandaged, warm and safe indoors.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (2).jpeg" alt="Tan and black puppy resting on a floral blanket"><figcaption>A soft bed, maybe for the first time.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (1).jpeg" alt="Family member cradling a puppy indoors"><figcaption>Held like family.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (7).jpeg" alt="Tricolor dog resting on a bed"><figcaption>Trust, earned one day at a time.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.06 (5).jpeg" alt="Mother dog nursing her litter in a brick shelter"><figcaption>A mother and her litter, sheltered.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05.jpeg" alt="Happy rescued dog with a yellow collar"><figcaption>Healthy, collared &amp; home.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.04 (5).jpeg" alt="Rescued white dog held by a volunteer"><figcaption>From the street to safe arms.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (14).jpeg" alt="Recovering dog in a sweater asleep on a chair"><figcaption>Resting in a borrowed sweater.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.04 (6).jpeg" alt="Dogs playing with a stick together"><figcaption>Just being dogs again.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (3).jpeg" alt="Dog in a recovery cone lying by a cooler"><figcaption>Recovering after surgery.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.06 (9).jpeg" alt="Tiny puppy looking up at the camera"><figcaption>Every one of them matters.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (5).jpeg" alt="Dog resting safely in a playpen"><figcaption>A quiet, safe corner to heal.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (18).jpeg" alt="A rescued cow grazing and regaining strength"><figcaption>Grazing again, regaining strength.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.04 (1).jpeg" alt="Sleepy black puppy on a soft mat"><figcaption>Warm, fed and resting.</figcaption></figure>
+      <figure><img src="WhatsApp Image 2026-06-15 at 22.09.05 (12).jpeg" alt="Two rescued dogs resting together"><figcaption>Recovering, together.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- DONATE -->
+<section id="donate" class="donate-sec">
+  <div class="wrap">
+    <div class="donate">
+      <span class="kicker">How you can help</span>
+      <h2>You can keep the <em>bowls full</em>.</h2>
+      <p>This rescue runs entirely on the kindness of people like you. Every rupee goes straight to food, medicine and care — nothing else.</p>
+
+      <div class="give-grid">
+        <div class="give"><div class="amt">&#8377;500</div><div class="what">Feeds a litter of puppies for a week</div></div>
+        <div class="give"><div class="amt">&#8377;1,500</div><div class="what">Covers medicine for an injured dog</div></div>
+        <div class="give"><div class="amt">&#8377;5,000</div><div class="what">Treatment &amp; recovery for cattle</div></div>
+      </div>
+
+      <div class="details-card">
+        <div class="detail-row"><span class="k">UPI</span><span class="placeholder">[ ADD UPI ID ]</span></div>
+        <div class="detail-row"><span class="k">Bank / A/C</span><span class="placeholder">[ ADD BANK DETAILS ]</span></div>
+        <div class="detail-row"><span class="k">Call / WhatsApp</span><span class="placeholder">[ ADD PHONE NUMBER ]</span></div>
+        <div class="detail-row"><span class="k">Follow the work</span><span class="placeholder">[ ADD INSTAGRAM / SOCIAL ]</span></div>
+      </div>
+
+      <p class="share-note">Can't give today? Share this page. Sometimes the right person seeing it<br>is worth more than any single donation.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="fmark">Run with love by Vihan &amp; family — Jabalpur, India</p>
+  <p class="small">Made with <span class="heart">&#10084;</span> for the animals who can't ask for help themselves.</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="close" id="lbClose">&times;</span>
+  <img id="lbImg" src="" alt="Enlarged photo">
+</div>
+
+<script>
+  const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
+  document.getElementById('masonry').addEventListener('click',e=>{
+    const img=e.target.closest('img');
+    if(!img)return;
+    lbImg.src=img.getAttribute('src');
+    lb.classList.add('open');
+  });
+  function closeLb(){lb.classList.remove('open');}
+  lb.addEventListener('click',closeLb);
+  document.getElementById('lbClose').addEventListener('click',closeLb);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
+</script>
+
+</body>
+</html>
