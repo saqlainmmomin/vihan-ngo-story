@@ -19,12 +19,6 @@
   img{display:block;width:100%;height:100%;object-fit:cover}
   h1,h2,h3,.display{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em;line-height:1.12}
 
-  /* print toolbar (screen only) */
-  .printbar{position:sticky;top:0;z-index:50;background:#241c16;color:#fff;display:flex;align-items:center;justify-content:center;gap:14px;padding:10px 16px;font-size:.92rem;flex-wrap:wrap}
-  .printbar b{font-weight:600}
-  .printbar button{background:var(--accent);color:#fff;border:none;border-radius:50px;padding:9px 20px;font-weight:600;font-size:.92rem;cursor:pointer;font-family:inherit}
-  .printbar button:hover{background:#a8431f}
-
   /* HERO */
   .hero{position:relative;min-height:96vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden}
   .hero .bg{position:absolute;inset:0;z-index:0}
@@ -104,7 +98,6 @@
   /* ---------- PRINT (PDF) ---------- */
   @media print{
     *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
-    .printbar{display:none !important}
     html,body{background:#fff}
     @page{margin:12mm 10mm;size:A4 portrait}
 
@@ -142,11 +135,6 @@
 </style>
 </head>
 <body>
-
-<div class="printbar">
-  <span><b>To save as PDF:</b> click the button (or press Ctrl/Cmd&nbsp;+&nbsp;P) → choose “Save as PDF”. The photos embed automatically.</span>
-  <button onclick="window.print()">Save as PDF</button>
-</div>
 
 <!-- HERO -->
 <header class="hero">
